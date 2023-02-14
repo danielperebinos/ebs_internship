@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from apps.tasks.models import Task
+from apps.tasks.models import Task, Comment
 from apps.users.serializers import UserReadSerializer
 
 
@@ -33,3 +33,17 @@ class UpdateStatusTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ('id', 'status_field',)
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ('id', 'task', 'text')
+
+
+class CommentListSerializer(serializers.ModelSerializer):
+    comments = CommentSerializer(source='comment_set', many=True, read_only=True)
+
+    class Meta:
+        model = Task
+        fields = ('id', 'comments')

@@ -13,3 +13,9 @@ class Task(models.Model):
 
     status_field = models.CharField(max_length=10, choices=Status.choices, default=Status.WAITING)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class Comment(models.Model):
+    text = models.TextField()
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-kc(*$=#9iv=5ux7vts5if_dszkhu+%9_*z@_7s*w0r#r@u878%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -203,3 +203,16 @@ LOGGING = {
         },
     },
 }
+
+
+DEFAULT_FROM_EMAIL = 'workorbit@gmail.com'
+SERVER_EMAIL = 'workorbit@gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'workorbit@gmail.com'
+EMAIL_HOST_PASSWORD = 'P@ssw0rd5'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
