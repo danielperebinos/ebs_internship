@@ -13,3 +13,16 @@ class UserSerializer(serializers.ModelSerializer):
             "username",
             "password",
         )
+
+class UserReadSerializer(serializers.ModelSerializer):
+    fullname = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = (
+            "id",
+            "fullname"
+        )
+
+    def get_fullname(self, obj):
+        return f"{obj.first_name} {obj.last_name}"
