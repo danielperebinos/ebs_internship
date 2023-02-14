@@ -21,3 +21,15 @@ class ListTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ('id', 'title')
+
+
+class UpdateUserTaskSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Task
+        fields = ('id', 'user',)
+
+
+class UpdateStatusTaskSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Task
+        fields = ('id', 'status_field',)
