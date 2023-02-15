@@ -1,7 +1,9 @@
-from rest_framework import generics, views
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 from apps.tasks import serializers
 from rest_framework.response import Response
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema, no_body
 from apps.tasks.models import Task, User
 
 from django.core.mail import send_mail
@@ -50,13 +52,11 @@ class ListCompletedTaskView(generics.ListAPIView):
 class UpdateTaskUserView(generics.UpdateAPIView):
     serializer_class = serializers.UpdateUserTaskSerializer
     queryset = Task.objects.all()
-    lookup_field = "pk"
 
     def update(self, request, *args, **kwargs):
-        instance = self.get_object()
+        instance = Task.objects.filter(id=request.data.get('task_id')).first()
         email = request.user.email
-        serializer = self.get_serializer(instance=instance, data=request.data)
-
+        serializer = self.get_serializer(instance=instance, data={'user': request.data.get('user_id')}, partial=True)
 
         if serializer.is_valid():
             serializer.save()
@@ -72,6 +72,21 @@ class UpdateTaskUserView(generics.UpdateAPIView):
             return Response(data=serializer.data)
         else:
             return Response(data=serializer.errors)
+
+    swagger_user_id = openapi.Parameter('user_id', openapi.IN_QUERY,
+                                        description='The id of the user you want to assign task',
+                                        type=openapi.TYPE_INTEGER)
+    swagger_task_id = openapi.Parameter('task_id', openapi.IN_QUERY,
+                                        description='The id of the task you want to assign',
+                                        type=openapi.TYPE_INTEGER)
+
+    @swagger_auto_schema(manual_parameters=[swagger_user_id, swagger_task_id], request_body=no_body)
+    def put(self, request, *args, **kwargs):
+        return super().put(request, *args, **kwargs)
+
+    @swagger_auto_schema(manual_parameters=[swagger_user_id, swagger_task_id], request_body=no_body)
+    def patch(self, request, *args, **kwargs):
+        return super().patch(request, *args, **kwargs)
 
 
 class UpdateTaskStatusView(generics.UpdateAPIView):
@@ -95,7 +110,6 @@ class CompleteTaskView(generics.UpdateAPIView):
     serializer_class = serializers.UpdateStatusTaskSerializer
     lookup_field = 'pk'
 
-
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.serializer_class(instance, data={'status_field': 'Done'}, partial=True)
@@ -116,6 +130,16 @@ class CompleteTaskView(generics.UpdateAPIView):
             )
 
         return Response(serializer.data)
+
+    swagger_id_parameter = openapi.Parameter('id', openapi.IN_PATH, description='Task id', type=openapi.TYPE_INTEGER)
+
+    @swagger_auto_schema(request_body=no_body)
+    def patch(self, request, *args, **kwargs):
+        return super().patch(request, *args, **kwargs)
+
+    @swagger_auto_schema(request_body=no_body)
+    def put(self, request, *args, **kwargs):
+        return super().put(request, *args, **kwargs)
 
 
 class DeleteTaskView(generics.DestroyAPIView):
@@ -167,3 +191,10 @@ class SearchTaskView(generics.ListAPIView):
     def get_queryset(self):
         title = self.request.data.get('title', '')
         return Task.objects.filter(title__contains=title)
+
+    swagger_title = openapi.Parameter('title', openapi.IN_QUERY, description='Searching titles for your input',
+                                      type=openapi.TYPE_STRING)
+
+    @swagger_auto_schema(manual_parameters=[swagger_title])
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
