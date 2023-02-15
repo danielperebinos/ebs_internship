@@ -205,13 +205,13 @@ LOGGING = {
 }
 
 
-DEFAULT_FROM_EMAIL = 'workorbit@gmail.com'
-SERVER_EMAIL = 'workorbit@gmail.com'
+DEFAULT_FROM_EMAIL = 'daniel.perebinos@mail.ebs-integrator.com'
+SERVER_EMAIL = 'daniel.perebinos@mail.ebs-integrator.com'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'mail.ebs-integrator.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'workorbit@gmail.com'
-EMAIL_HOST_PASSWORD = 'P@ssw0rd5'
+EMAIL_HOST_USER = 'daniel.perebinos@mail.ebs-integrator.com'
+EMAIL_HOST_PASSWORD = 'B9zjdcUB2c'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

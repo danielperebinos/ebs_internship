@@ -2,7 +2,7 @@ from rest_framework import generics, views
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from apps.tasks import serializers
 from rest_framework.response import Response
-from apps.tasks.models import Task
+from apps.tasks.models import Task, User
 
 from django.core.mail import send_mail
 
@@ -51,22 +51,24 @@ class UpdateTaskUserView(generics.UpdateAPIView):
     serializer_class = serializers.UpdateUserTaskSerializer
     queryset = Task.objects.all()
     lookup_field = "pk"
-    permission_classes = (AllowAny,)
 
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
+        email = request.user.email
         serializer = self.get_serializer(instance=instance, data=request.data)
 
-        send_mail(
-            'Subject here',
-            'Here is the message.',
-            'daniel.perebinos@gmail.com',
-            ['daniel.perebinos10@gmail.com'],
-            fail_silently=False,
-        )
 
         if serializer.is_valid():
             serializer.save()
+
+            send_mail(
+                'Subject here',
+                f'Task with id:{serializer.data.get("id")} was assigned to you. Check it please.',
+                'daniel.perebinos@mail.ebs-integrator.com',
+                [email],
+                fail_silently=False,
+            )
+
             return Response(data=serializer.data)
         else:
             return Response(data=serializer.errors)
@@ -93,12 +95,25 @@ class CompleteTaskView(generics.UpdateAPIView):
     serializer_class = serializers.UpdateStatusTaskSerializer
     lookup_field = 'pk'
 
+
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.serializer_class(instance, data={'status_field': 'Done'}, partial=True)
 
         if serializer.is_valid():
             serializer.save()
+            emails = set([User.objects.filter(id=comment.user.id).first().email
+                      for comment in Task.objects.filter(
+                          id=serializer.data.get('id')
+                      ).first().comment_set.all()])
+
+            send_mail(
+                'Subject here',
+                f'Task with id:{serializer.data.get("id")} you commented, was done. Check it please.',
+                'daniel.perebinos@mail.ebs-integrator.com',
+                emails,
+                fail_silently=False,
+            )
 
         return Response(serializer.data)
 
@@ -117,6 +132,21 @@ class CreateCommentView(generics.GenericAPIView):
 
         if serializer.is_valid():
             serializer.save(user=request.user)
+
+            email = User.objects.filter(
+                id=Task.objects.filter(
+                    id=serializer.data.get('task')
+                ).first().user.id
+            ).first().email
+
+            send_mail(
+                'Subject here',
+                f'Your task with id:{serializer.data.get("task")} was commented. Check it please.',
+                'daniel.perebinos@mail.ebs-integrator.com',
+                [email],
+                fail_silently=False,
+            )
+
             return Response({'id': serializer.data.get('id')})
 
         else:
