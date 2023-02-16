@@ -59,16 +59,7 @@ class UpdateTaskUserView(generics.UpdateAPIView):
         serializer = self.get_serializer(instance=instance, data={'user': request.data.get('user_id')}, partial=True)
 
         if serializer.is_valid():
-            serializer.save()
-
-            send_mail(
-                'Subject here',
-                f'Task with id:{serializer.data.get("id")} was assigned to you. Check it please.',
-                'daniel.perebinos@mail.ebs-integrator.com',
-                [email],
-                fail_silently=False,
-            )
-
+            serializer.save(start_at=datetime.now() if request.data.get('status_field') == 'In Process' else None)
             return Response(data=serializer.data)
         else:
             return Response(data=serializer.errors)
@@ -116,18 +107,6 @@ class CompleteTaskView(generics.UpdateAPIView):
 
         if serializer.is_valid():
             serializer.save()
-            emails = set([User.objects.filter(id=comment.user.id).first().email
-                      for comment in Task.objects.filter(
-                          id=serializer.data.get('id')
-                      ).first().comment_set.all()])
-
-            send_mail(
-                'Subject here',
-                f'Task with id:{serializer.data.get("id")} you commented, was done. Check it please.',
-                'daniel.perebinos@mail.ebs-integrator.com',
-                emails,
-                fail_silently=False,
-            )
 
         return Response(serializer.data)
 
