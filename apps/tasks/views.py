@@ -1,12 +1,11 @@
 from rest_framework import generics, viewsets, mixins, status
 from rest_framework.decorators import action
-from rest_framework.permissions import AllowAny
 
 from apps.tasks import serializers
 from rest_framework.response import Response
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema, no_body
-from apps.tasks.models import Task, User, TimeLog, Status, Comment
+from apps.tasks.models import Task, TimeLog, Status, Comment
 
 import datetime
 
@@ -14,7 +13,6 @@ import datetime
 class TaskViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.DestroyModelMixin,
                   viewsets.GenericViewSet):
     queryset = Task.objects.all()
-    permission_classes = [AllowAny]
 
     def create(self, request, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -89,7 +87,7 @@ class TaskViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Retriev
             return serializers.TaskDurationSerializer
         if self.action in ['my', 'completed', 'search_by_title']:
             return serializers.ListTaskSerializer
-        if self.action == 'assign_task':
+        if self.action == 'assign':
             return serializers.UpdateUserTaskSerializer
         if self.action in ['update_status', 'complete']:
             return serializers.UpdateStatusTaskSerializer
@@ -99,7 +97,6 @@ class TaskViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Retriev
 class CommentViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = Comment.objects.all()
     serializer_class = serializers.CommentSerializer
-    permission_classes = [AllowAny]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -122,7 +119,6 @@ class CommentViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.Ge
 
 
 class TimerLogViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
-    permission_classes = [AllowAny]
     queryset = TimeLog.objects.all()
 
     @swagger_auto_schema(request_body=no_body, manual_parameters=[
