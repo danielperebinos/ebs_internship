@@ -1,12 +1,15 @@
 from rest_framework import serializers
-from apps.tasks.models import Task, Comment
+from apps.tasks.models import Task, Comment, TimeLog
 from apps.users.serializers import UserReadSerializer
 
 
+######################
+# Tasks
 class CreateTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ('title', 'description', 'status_field')
+        fields = ('id', 'title', 'description', 'status_field')
+        read_only = ('id',)
 
 
 class ViewTaskSerializer(serializers.ModelSerializer):
@@ -35,6 +38,8 @@ class UpdateStatusTaskSerializer(serializers.ModelSerializer):
         fields = ('id', 'status_field',)
 
 
+######################
+# Comments
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
@@ -47,3 +52,23 @@ class CommentListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ('id', 'comments')
+
+
+######################
+# Time Logs
+class TimeLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TimeLog
+        fields = ('start', 'duration', 'task', 'user')
+
+
+class CreateTimeLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TimeLog
+        fields = ('start', 'duration', 'task')
+
+
+class TaskDurationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Task
+        fields = ('id', 'title', 'duration')

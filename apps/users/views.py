@@ -24,11 +24,7 @@ class RegisterUserView(GenericAPIView):
         password = validated_data.pop("password")
 
         # Create user
-        user = User.objects.create(
-            **validated_data,
-            is_superuser=True,
-            is_staff=True,
-        )
+        user = User.objects.create(**validated_data)
 
         # Set password
         user.set_password(password)
