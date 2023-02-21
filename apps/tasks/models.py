@@ -29,9 +29,7 @@ class Task(models.Model):
         custom_send_email(f'Your task with id:{self.id} was done. Check it please.', [self.user.email])
 
     def send_email_to_commenters(self):
-        receivers = set([User.objects.filter(id=comment.user.id).first().email
-                         for comment in Task.objects.filter(id=self.id).first().comment_set.all()])
-
+        receivers = set(Task.objects.get(id=self.id).comment_set.all().values_list('user__email', flat=True))
         custom_send_email(f'Task with id:{self.id} you commented, was done. Check it please.', receivers)
 
     def duration(self):

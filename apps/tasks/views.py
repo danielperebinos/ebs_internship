@@ -1,9 +1,9 @@
 from rest_framework import generics, viewsets, mixins, status
 from rest_framework.decorators import action
+from rest_framework.permissions import AllowAny
 
 from apps.tasks import serializers
 from rest_framework.response import Response
-from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema, no_body
 from apps.tasks.models import Task, TimeLog, Status, Comment
 
@@ -28,7 +28,7 @@ class TaskViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Retriev
         serializer = self.get_serializer(my_tasks, many=True)
         return Response(serializer.data)
 
-    @action(detail=False, methods=['get'], description='Get completed tasks')
+    @action(detail=False, methods=['get'], description='Get completed tasks', url_name='completed_tasks')
     def completed(self, request, **kwargs):
         my_tasks = Task.objects.filter(status_field=Status.DONE)
         serializer = self.get_serializer(my_tasks, many=True)
@@ -68,14 +68,19 @@ class TaskViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Retriev
         else:
             Response(serializer.errors)
 
-    @swagger_auto_schema(request_body=no_body, manual_parameters=[
-        openapi.Parameter('title', openapi.IN_QUERY, type=openapi.TYPE_STRING)
-    ])
+    @swagger_auto_schema(query_serializer=serializers.ListTaskSerializer())
     @action(detail=False, methods=['get'])
     def search_by_title(self, request, **kwargs):
         title = request.query_params.get('title', '')
         searched_tasks = Task.objects.filter(title__contains=title)
         serializer = self.get_serializer(searched_tasks, many=True)
+        return Response(serializer.data)
+
+    @action(detail=False, methods=['get'])
+    def top_20(self, request, *args, **kwargs):
+        tasks = self.get_queryset()
+        serializer = self.get_serializer(tasks, many=True)
+        print(serializer.data)
         return Response(serializer.data)
 
     def get_serializer_class(self):
@@ -91,6 +96,8 @@ class TaskViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Retriev
             return serializers.UpdateUserTaskSerializer
         if self.action in ['update_status', 'complete']:
             return serializers.UpdateStatusTaskSerializer
+        if self.action == 'top_20':
+            return serializers.TaskDurationSerializer
         return serializers.ViewTaskSerializer
 
 
@@ -107,9 +114,7 @@ class CommentViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.Ge
         else:
             return Response({"message": "failed", "details": serializer.errors})
 
-    @swagger_auto_schema(request_body=no_body, manual_parameters=[
-        openapi.Parameter('task_id', openapi.IN_QUERY, type=openapi.TYPE_INTEGER)
-    ])
+    @swagger_auto_schema(query_serializer=serializers.TaskCommentSerializer())
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
 
@@ -117,14 +122,19 @@ class CommentViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.Ge
         task_id = self.request.query_params.get('task_id')
         return queryset.filter(task__id=task_id)
 
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return serializers.CommentSerializer
+        if self.action == 'list':
+            return serializers.ReadCommentSerializer
+        return serializers.CommentSerializer
+
 
 class TimerLogViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = TimeLog.objects.all()
 
-    @swagger_auto_schema(request_body=no_body, manual_parameters=[
-        openapi.Parameter('task_id', openapi.IN_QUERY, type=openapi.TYPE_INTEGER)
-    ])
-    @action(detail=False, methods=['get'])
+    @swagger_auto_schema(request_body=no_body, query_serializer=serializers.GetTaskTimeLogSerializer())
+    @action(detail=False, methods=['put'])
     def start(self, request, *args, **kwargs):
         pk = request.query_params.get('task_id')
         if self.get_queryset().filter(task=pk, user=request.user.id, duration=0).count() > 0:
@@ -139,10 +149,8 @@ class TimerLogViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.G
         else:
             return Response({"message": "failed", "details": serializer.errors})
 
-    @swagger_auto_schema(request_body=no_body, manual_parameters=[
-        openapi.Parameter('task_id', openapi.IN_QUERY, type=openapi.TYPE_INTEGER)
-    ])
-    @action(detail=False, methods=['get'])
+    @swagger_auto_schema(query_serializer=serializers.GetTaskTimeLogSerializer(), request_body=no_body)
+    @action(detail=False, methods=['put'])
     def stop(self, request, *args, **kwargs):
         instance = generics.get_object_or_404(self.get_queryset(), task=request.query_params.get('task_id'),
                                               user=request.user.id, duration=0)
@@ -159,9 +167,7 @@ class TimerLogViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.G
         else:
             return Response(data=serializer.errors)
 
-    @swagger_auto_schema(request_body=no_body, manual_parameters=[
-        openapi.Parameter('task_id', openapi.IN_QUERY, type=openapi.TYPE_INTEGER)
-    ])
+    @swagger_auto_schema(query_serializer=serializers.GetTaskTimeLogSerializer(), request_body=no_body)
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
 

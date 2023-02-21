@@ -24,6 +24,7 @@ class ListTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ('id', 'title')
+        read_only = ('id',)
 
 
 class UpdateUserTaskSerializer(serializers.ModelSerializer):
@@ -46,12 +47,18 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = ('id', 'task', 'text')
 
 
-class CommentListSerializer(serializers.ModelSerializer):
-    comments = CommentSerializer(source='comment_set', many=True, read_only=True)
-
+class ReadCommentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Task
-        fields = ('id', 'comments')
+        model = Comment
+        fields = ('id', 'task', 'text')
+        read_only = ('id', 'text',)
+
+
+class TaskCommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ('id', 'task')
+        read_only = ('id',)
 
 
 ######################
@@ -72,3 +79,10 @@ class TaskDurationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ('id', 'title', 'duration')
+
+
+class GetTaskTimeLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TimeLog
+        fields = ('id', 'task')
+        read_only = ('id',)
