@@ -1,102 +1,22 @@
 [
 {
     "model": "tasks.task",
-    "pk": 1,
+    "id": 1,
     "fields": {
         "title": "title1",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nibh non elit volutpat aliquam. Proin volutpat lacinia quam.",
         "status_field": "Done",
-        "user": 3
-    }
-},
-{
-    "model": "tasks.task",
-    "pk": 2,
-    "fields": {
-        "title": "task2",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas semper mollis justo, at mollis mi iaculis non. Nulla turpis turpis.",
-        "status_field": "Done",
-        "user": 2
-    }
-},
-{
-    "model": "tasks.task",
-    "pk": 3,
-    "fields": {
-        "title": "task3",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lobortis lobortis elementum. Vestibulum tristique euismod luctus. Suspendisse venenatis lorem non.",
-        "status_field": "Waiting",
         "user": 1
     }
 },
 {
     "model": "tasks.task",
-    "pk": 4,
+    "id": 2,
     "fields": {
-        "title": "task4",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a massa ut est scelerisque porttitor. Pellentesque feugiat placerat tellus eget.",
+        "title": "task2",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas semper mollis justo, at mollis mi iaculis non. Nulla turpis turpis.",
         "status_field": "Done",
-        "user": 2
-    }
-},
-{
-    "model": "tasks.task",
-    "pk": 6,
-    "fields": {
-        "title": "a",
-        "description": "little description of the task",
-        "status_field": "Waiting",
-        "user": 3
-    }
-},
-{
-    "model": "tasks.task",
-    "pk": 7,
-    "fields": {
-        "title": "b",
-        "description": "little description of the task. very very little",
-        "status_field": "Waiting",
-        "user": 3
-    }
-},
-{
-    "model": "tasks.task",
-    "pk": 8,
-    "fields": {
-        "title": "omg",
-        "description": "aslknadnkdklamsmal",
-        "status_field": "Waiting",
-        "user": 3
-    }
-},
-{
-    "model": "tasks.task",
-    "pk": 9,
-    "fields": {
-        "title": "omg",
-        "description": "aslknadnkdklamsmal",
-        "status_field": "Waiting",
-        "user": 3
-    }
-},
-{
-    "model": "tasks.task",
-    "pk": 10,
-    "fields": {
-        "title": "omg",
-        "description": "aslknadnkdklamsmal",
-        "status_field": "Waiting",
-        "user": 3
-    }
-},
-{
-    "model": "tasks.task",
-    "pk": 11,
-    "fields": {
-        "title": "omg",
-        "description": "aslknadnkdklamsmal",
-        "status_field": "Waiting",
-        "user": 3
+        "user": 1
     }
 }
 ]

@@ -1,47 +1,20 @@
 [
 {
     "model": "tasks.comment",
-    "pk": 1,
+    "id": 1,
     "fields": {
         "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent placerat a erat id suscipit. Praesent ut arcu in ex finibus.",
-        "task": 1,
-        "user": 3
-    }
-},
-{
-    "model": "tasks.comment",
-    "pk": 2,
-    "fields": {
-        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent placerat a erat id suscipit. Praesent ut arcu in ex finibus.",
-        "task": 1,
-        "user": 3
-    }
-},
-{
-    "model": "tasks.comment",
-    "pk": 3,
-    "fields": {
-        "text": "Very Good task",
-        "task": 4,
-        "user": 4
-    }
-},
-{
-    "model": "tasks.comment",
-    "pk": 4,
-    "fields": {
-        "text": "Very Good task",
-        "task": 4,
-        "user": 4
-    }
-},
-{
-    "model": "tasks.comment",
-    "pk": 5,
-    "fields": {
-        "text": "test",
         "task": 2,
-        "user": 3
+        "user": 1
+    }
+},
+{
+    "model": "tasks.comment",
+    "id": 2,
+    "fields": {
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent placerat a erat id suscipit. Praesent ut arcu in ex finibus.",
+        "task": 1,
+        "user": 1
     }
 }
 ]

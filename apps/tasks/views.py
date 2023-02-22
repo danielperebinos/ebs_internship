@@ -1,7 +1,6 @@
 from django.db import models
 from rest_framework import generics, viewsets, mixins, status
 from rest_framework.decorators import action
-from rest_framework.permissions import AllowAny
 
 from apps.tasks import serializers
 from rest_framework.response import Response
@@ -49,7 +48,7 @@ class TaskViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Retriev
     @action(detail=True, methods=['put'])
     def update_status(self, request, **kwargs):
         instance = generics.get_object_or_404(self.get_queryset(), id=kwargs.get('pk'))
-        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        serializer = self.get_serializer(instance, data=request.data)
 
         if serializer.is_valid():
             serializer.save()
@@ -79,7 +78,8 @@ class TaskViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Retriev
 
     @action(detail=False, methods=['get'])
     def top_20(self, request, *args, **kwargs):
-        tasks = self.get_queryset().values('id', 'title').annotate(duration=models.Sum('timelog__duration')).order_by('-duration')[:20]
+        tasks = self.get_queryset().values('id', 'title').annotate(duration=models.Sum('timelog__duration')).order_by(
+            '-duration')[:20]
         serializer = self.get_serializer(tasks, many=True)
         return Response(serializer.data)
 
@@ -119,8 +119,8 @@ class CommentViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.Ge
         return super().list(request, *args, **kwargs)
 
     def filter_queryset(self, queryset):
-        task_id = self.request.query_params.get('task_id')
-        return queryset.filter(task__id=task_id)
+        task = self.request.query_params.get('task')
+        return queryset.filter(task__id=task)
 
     def get_serializer_class(self):
         if self.action == 'create':
@@ -130,13 +130,14 @@ class CommentViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.Ge
         return serializers.CommentSerializer
 
 
-class TimerLogViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+class TimeLogViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = TimeLog.objects.all()
 
     @swagger_auto_schema(request_body=no_body, query_serializer=serializers.GetTaskTimeLogSerializer())
     @action(detail=False, methods=['put'])
     def start(self, request, *args, **kwargs):
-        pk = request.query_params.get('task_id')
+        pk = request.query_params.get('task')
+
         if self.get_queryset().filter(task=pk, user=request.user.id, duration=0).count() > 0:
             return Response({"message": "Already exists an other timer, you should close."},
                             status=status.HTTP_400_BAD_REQUEST)
@@ -149,11 +150,12 @@ class TimerLogViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.G
         else:
             return Response({"message": "failed", "details": serializer.errors})
 
-    @swagger_auto_schema(query_serializer=serializers.GetTaskTimeLogSerializer(), request_body=no_body)
+    @swagger_auto_schema(request_body=no_body, query_serializer=serializers.GetTaskTimeLogSerializer())
     @action(detail=False, methods=['put'])
     def stop(self, request, *args, **kwargs):
-        instance = generics.get_object_or_404(self.get_queryset(), task=request.query_params.get('task_id'),
-                                              user=request.user.id, duration=0)
+        pk = request.query_params.get('task')
+
+        instance = generics.get_object_or_404(self.get_queryset(), task=pk, user=request.user.id, duration=0)
 
         duration = (datetime.datetime.now() - instance.start.replace(tzinfo=None)).seconds // 60
 
@@ -190,14 +192,8 @@ class TimerLogViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.G
 
         return Response({'duration': time})
 
-    @action(detail=False, methods=['get'])
-    def top_20(self, request, *args, **kwargs):
-        logs = TimeLog.objects.all().order_by('-duration')[:20]
-        serializer = self.get_serializer(logs, many=True)
-        return Response(serializer.data)
-
     def filter_queryset(self, queryset):
-        return queryset.filter(task=self.request.query_params.get('task_id'))
+        return queryset.filter(task=self.request.query_params.get('task'))
 
     def get_serializer_class(self):
         if self.action == 'create':

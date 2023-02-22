@@ -6,7 +6,7 @@ from apps.tasks import views
 router = routers.SimpleRouter()
 router.register(r'task', views.TaskViewSet)
 router.register(r'comments', views.CommentViewSet)
-router.register(r'timer', views.TimerLogViewSet)
+router.register(r'timer', views.TimeLogViewSet)
 
 urlpatterns = []
 urlpatterns += router.urls
