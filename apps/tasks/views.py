@@ -1,3 +1,4 @@
+from django.db import models
 from rest_framework import generics, viewsets, mixins, status
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
@@ -78,9 +79,8 @@ class TaskViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Retriev
 
     @action(detail=False, methods=['get'])
     def top_20(self, request, *args, **kwargs):
-        tasks = self.get_queryset()
+        tasks = self.get_queryset().values('id', 'title').annotate(duration=models.Sum('timelog__duration')).order_by('-duration')
         serializer = self.get_serializer(tasks, many=True)
-        print(serializer.data)
         return Response(serializer.data)
 
     def get_serializer_class(self):
