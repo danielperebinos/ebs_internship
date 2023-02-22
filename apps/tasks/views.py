@@ -79,7 +79,7 @@ class TaskViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Retriev
 
     @action(detail=False, methods=['get'])
     def top_20(self, request, *args, **kwargs):
-        tasks = self.get_queryset().values('id', 'title').annotate(duration=models.Sum('timelog__duration')).order_by('-duration')
+        tasks = self.get_queryset().values('id', 'title').annotate(duration=models.Sum('timelog__duration')).order_by('-duration')[:20]
         serializer = self.get_serializer(tasks, many=True)
         return Response(serializer.data)
 
