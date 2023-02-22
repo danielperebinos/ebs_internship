@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+  redis:
+    image: redis
+#  pghero:
+#    image: ankane/pghero
+#    container_name: pghero
+#    network_mode: host
+#    ports:
+#      - '8080:8080'
+#    environment:
+#      DATABASE_URL: db
+#    volumes:
+#      - /home/daniel.perebinos@internal.ebs.md/PycharmProjects/milestone2/pghero.yml:/app/config/pghero.yml
+

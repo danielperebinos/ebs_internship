@@ -120,8 +120,14 @@ SWAGGER_SETTINGS = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432,
     }
 }
 
@@ -163,8 +169,6 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DATE_FORMAT = "%Y-%m-%d %H:%m"
-
-SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -210,3 +214,18 @@ EMAIL_HOST_USER = 'daniel.perebinos@mail.ebs-integrator.com'
 EMAIL_HOST_PASSWORD = 'B9zjdcUB2c'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+# SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
