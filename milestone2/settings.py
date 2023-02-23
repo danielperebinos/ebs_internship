@@ -118,14 +118,16 @@ SWAGGER_SETTINGS = {
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
+POSTGRES_USER = os.environ.get('POSTGRES_USER', 'postgres')
+POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD', 'postgres')
+
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'USER': POSTGRES_USER,
+        'PASSWORD': POSTGRES_PASSWORD,
         'HOST': 'db',
         'PORT': 5432,
     }
@@ -215,17 +217,17 @@ EMAIL_HOST_PASSWORD = 'B9zjdcUB2c'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+REDIS_HOST = os.environ.get('REDIS_HOST', '127.0.0.1')
+REDIS_PORT = os.environ.get('REDIS_PORT', '6379')
 
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
+        "LOCATION": f"redis://{REDIS_HOST}:{REDIS_PORT}/0",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     }
 }
 
-# SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
-SESSION_CACHE_ALIAS = "default"

@@ -1,13 +1,13 @@
 FROM python:3.8
 
-ENV PYTHONUNBUFFERED 1
+RUN mkdir /app
+WORKDIR /app
+COPY requirements.txt /app/
 
-RUN mkdir /code
-WORKDIR /code
-ADD requirements.txt /code/
-RUN pip install -r requirements.txt
 RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
 RUN pip install gunicorn
-ADD . /code/
+COPY . /app/
 
-
+CMD python manage.py runserver 0.0.0.0:8000
+EXPOSE 8000

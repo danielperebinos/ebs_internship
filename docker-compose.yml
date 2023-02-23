@@ -1,16 +1,22 @@
-version: '3'
+# Django app compose
 
 services:
   web:
+    container_name: django_container
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    environment:
+      - REDIS_HOST=redis
     volumes:
-      - .:/code
+      - .:/app
     ports:
       - '8000:8000'
     depends_on:
       - db
+      - redis
+
+
   db:
+    container_name: postgres_container
     image: postgres
     restart: always
     environment:
@@ -18,16 +24,35 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - '5432:5432'
+
+
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+
+
   redis:
+    container_name: redis_container
     image: redis
-#  pghero:
-#    image: ankane/pghero
-#    container_name: pghero
-#    network_mode: host
-#    ports:
-#      - '8080:8080'
-#    environment:
-#      DATABASE_URL: db
-#    volumes:
-#      - /home/daniel.perebinos@internal.ebs.md/PycharmProjects/milestone2/pghero.yml:/app/config/pghero.yml
+    restart: always
+    ports:
+      - '6379:6379'
+
+
+  pghero:
+    container_name: pghero
+    image: ankane/pghero
+    network_mode: host
+    ports:
+      - '8080:8080'
+    environment:
+      DATABASE_URL: postgres://POSTGRES_USER:POSTGRES_PASSWORD@db:5432
+    volumes:
+      - /home/daniel.perebinos@internal.ebs.md/PycharmProjects/milestone2/pghero.yml:/app/config/pghero.yml
 
