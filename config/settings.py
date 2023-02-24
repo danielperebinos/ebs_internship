@@ -120,9 +120,11 @@ SWAGGER_SETTINGS = {
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
-POSTGRES_NAME = os.environ.get('POSTGRES_NAME', 'milestones')
-POSTGRES_USER = os.environ.get('POSTGRES_USER', 'postgres')
-POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD', 'postgres')
+POSTGRES_NAME = os.environ.get('POSTGRES_NAME', config('POSTGRES_NAME'))
+POSTGRES_USER = os.environ.get('POSTGRES_USER', config('POSTGRES_USER'))
+POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD', config('POSTGRES_PASSWORD'))
+POSTGRES_HOST = os.environ.get('db', config('POSTGRES_HOST'))
+POSTGRES_PORT = os.environ.get('POSTGRES_PORT', config('POSTGRES_PORT'))
 
 DATABASES = {
     'default': {
@@ -130,8 +132,8 @@ DATABASES = {
         'NAME': POSTGRES_NAME,
         'USER': POSTGRES_USER,
         'PASSWORD': POSTGRES_PASSWORD,
-        'HOST': 'db',
-        'PORT': 5432,
+        'HOST': POSTGRES_HOST,
+        'PORT': POSTGRES_PORT,
     }
 }
 
@@ -219,8 +221,8 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-REDIS_HOST = os.environ.get('REDIS_HOST', '127.0.0.1')
-REDIS_PORT = os.environ.get('REDIS_PORT', '6379')
+REDIS_HOST = os.environ.get('REDIS_HOST', config('REDIS_HOST'))
+REDIS_PORT = os.environ.get('REDIS_PORT', config('REDIS_PORT'))
 
 CACHES = {
     "default": {

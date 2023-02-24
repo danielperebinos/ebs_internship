@@ -1,20 +1,6 @@
 # Django app compose
 
 services:
-  web:
-    container_name: django_container
-    build: .
-    environment:
-      - REDIS_HOST=redis
-    volumes:
-      - .:/app
-    ports:
-      - '8000:8000'
-    depends_on:
-      - db
-      - redis
-
-
   db:
     container_name: postgres_container
     image: postgres
@@ -23,8 +9,28 @@ services:
       - POSTGRES_NAME=milestones
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PORT=5432
     ports:
       - '5432:5432'
+
+
+  web:
+    container_name: django_container
+    build: .
+    environment:
+      - REDIS_HOST=redis
+      - POSTGRES_NAME=milestones
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_HOST=db
+    volumes:
+      - .:/app
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
+      - redis
 
 
   pgadmin:
