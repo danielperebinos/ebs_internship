@@ -1,6 +1,7 @@
+from django.test import TestCase
 from django.urls import reverse
 from rest_framework.test import APIClient
-from rest_framework.test import APITestCase
+
 
 from django.contrib.auth.models import User
 
@@ -8,8 +9,8 @@ from apps.tasks import serializers
 from apps.tasks.models import TimeLog
 
 
-class CommentViewTest(APITestCase):
-    fixtures = ['user.json', 'task.json', 'comment.json', 'timelog.json']
+class TimeLogViewTest(TestCase):
+    fixtures = ['user.json', 'task.json', 'timelog.json']
 
     def setUp(self) -> None:
         self.client = APIClient()
@@ -29,6 +30,7 @@ class CommentViewTest(APITestCase):
         url = reverse('timelog-stop')
         data = {'task': task_id}
         query_params = ''.join([f'{key}={value}&' for key, value in data.items()])
+
         response = self.client.put(url, QUERY_STRING=query_params)
         self.assertEqual(response.status_code, 200)
 

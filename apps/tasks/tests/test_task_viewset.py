@@ -10,7 +10,7 @@ from apps.tasks.models import Task, Status
 
 
 class TaskViewTest(APITestCase):
-    fixtures = ['user.json', 'task.json', 'comment.json', 'timelog.json']
+    fixtures = ['timelog.json', 'user.json', 'task.json']
 
     def setUp(self) -> None:
         self.client = APIClient()
@@ -84,7 +84,7 @@ class TaskViewTest(APITestCase):
 
     def test_complete_task(self):
         id = 1
-        url = reverse('task-update-status', kwargs={'pk': id})
+        url = reverse('task-complete', kwargs={'pk': id})
         data = {
             'status_field': str(Status.DONE),
             'id': id
@@ -93,7 +93,7 @@ class TaskViewTest(APITestCase):
         self.assertEqual(response.status_code, 200)
 
         serializer = serializers.UpdateStatusTaskSerializer(Task.objects.get(id=id))
-        self.assertDictEqual(dict(serializer.data), data)
+        self.assertDictEqual(serializer.data, data)
 
     def test_search_task_by_title(self):
         url = reverse('task-search-by-title')

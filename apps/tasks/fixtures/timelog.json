@@ -1,7 +1,7 @@
 [
 {
     "model": "tasks.timelog",
-    "pk": 1,
+    "id": 1,
     "fields": {
         "start": "2023-02-15T13:05:19.859Z",
         "duration": 0,
@@ -11,7 +11,7 @@
 },
 {
     "model": "tasks.timelog",
-    "pk": 2,
+    "id": 2,
     "fields": {
         "start": "2023-02-15T13:23:12.559Z",
         "duration": 1,

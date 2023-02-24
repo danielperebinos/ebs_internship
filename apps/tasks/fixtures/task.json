@@ -1,21 +1,21 @@
 [
 {
     "model": "tasks.task",
-    "id": 1,
+    "pk": 1,
     "fields": {
-        "title": "title1",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nibh non elit volutpat aliquam. Proin volutpat lacinia quam.",
-        "status_field": "Done",
+        "title": "gliqlnsobndjxip",
+        "description": "naagtlyiduwsxxuiwaaqxgdzywkyuj",
+        "status_field": "Waiting",
         "user": 1
     }
 },
 {
     "model": "tasks.task",
-    "id": 2,
+    "pk": 2,
     "fields": {
-        "title": "task2",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas semper mollis justo, at mollis mi iaculis non. Nulla turpis turpis.",
-        "status_field": "Done",
+        "title": "ahbtusxeyktfpsk",
+        "description": "uvlzwzonnqcfflliunmeiazhxpuhiy",
+        "status_field": "Waiting",
         "user": 1
     }
 }

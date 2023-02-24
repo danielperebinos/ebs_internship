@@ -8,7 +8,11 @@ from apps.tasks.models import Task, Comment
 def send_email_to_task_owner_trigger(sender, instance, **kwargs):
     if instance.id is not None:
         current = instance
-        previous = Task.objects.get(id=instance.id)
+        previous = Task.objects.filter(id=instance.id)
+        if previous.count() == 0:
+            return
+        previous = previous.first()
+
         if previous.user.id != current.user.id:
             current.send_email_assign()
 

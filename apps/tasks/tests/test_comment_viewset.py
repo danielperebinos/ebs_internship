@@ -9,7 +9,7 @@ from apps.tasks.models import Comment
 
 
 class CommentViewTest(APITestCase):
-    fixtures = ['user.json', 'task.json', 'comment.json', 'timelog.json']
+    fixtures = ['user.json', 'task.json', 'comment.json']
 
     def setUp(self) -> None:
         self.client = APIClient()
