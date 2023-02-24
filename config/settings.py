@@ -63,7 +63,7 @@ MIDDLEWARE = [
     "apps.common.middlewares.ApiMiddleware",
 ]
 
-ROOT_URLCONF = 'milestone2.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
@@ -81,7 +81,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'milestone2.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_HEADERS = (

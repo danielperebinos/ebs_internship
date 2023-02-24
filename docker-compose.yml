@@ -54,6 +54,6 @@ services:
     environment:
       DATABASE_URL: postgres://postgres:postgres@0.0.0.0:5432
     volumes:
-      - /home/daniel.perebinos@internal.ebs.md/PycharmProjects/milestone2/pghero.yml:/app/config/pghero.yml
+      - /home/daniel.perebinos@internal.ebs.md/PycharmProjects/milestone2/pghero.yml:/app/milestone2/pghero.yml
     depends_on:
       - db
