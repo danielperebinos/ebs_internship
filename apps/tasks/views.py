@@ -1,13 +1,18 @@
 from django.db import models
-from rest_framework import generics, viewsets, mixins, status
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
+
+from rest_framework.response import Response
 from rest_framework.decorators import action
+from rest_framework import generics, viewsets, mixins, status
+from drf_yasg.utils import swagger_auto_schema, no_body
 
 from apps.tasks import serializers
-from rest_framework.response import Response
-from drf_yasg.utils import swagger_auto_schema, no_body
 from apps.tasks.models import Task, TimeLog, Status, Comment
 
 import datetime
+
+from config.settings import CACHE_TTL
 
 
 class TaskViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.DestroyModelMixin,
@@ -76,6 +81,7 @@ class TaskViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Retriev
         serializer = self.get_serializer(searched_tasks, many=True)
         return Response(serializer.data)
 
+    @method_decorator(cache_page(CACHE_TTL))
     @action(detail=False, methods=['get'])
     def top_20(self, request, *args, **kwargs):
         tasks = self.get_queryset().values('id', 'title').annotate(duration=models.Sum('timelog__duration')).order_by(

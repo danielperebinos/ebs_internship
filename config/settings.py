@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from decouple import config
 from pathlib import Path
 import os
 
@@ -119,13 +120,14 @@ SWAGGER_SETTINGS = {
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
+POSTGRES_NAME = os.environ.get('POSTGRES_NAME', 'milestones')
 POSTGRES_USER = os.environ.get('POSTGRES_USER', 'postgres')
 POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD', 'postgres')
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
+        'NAME': POSTGRES_NAME,
         'USER': POSTGRES_USER,
         'PASSWORD': POSTGRES_PASSWORD,
         'HOST': 'db',
@@ -207,13 +209,13 @@ LOGGING = {
     },
 }
 
-DEFAULT_FROM_EMAIL = 'daniel.perebinos@mail.ebs-integrator.com'
-SERVER_EMAIL = 'daniel.perebinos@mail.ebs-integrator.com'
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'mail.ebs-integrator.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'daniel.perebinos@mail.ebs-integrator.com'
-EMAIL_HOST_PASSWORD = 'B9zjdcUB2c'
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+SERVER_EMAIL = config('SERVER_EMAIL')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
@@ -230,4 +232,7 @@ CACHES = {
     }
 }
 
+CACHE_TTL = 60 * 1
+
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"

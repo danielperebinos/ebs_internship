@@ -20,6 +20,7 @@ services:
     image: postgres
     restart: always
     environment:
+      - POSTGRES_NAME=milestones
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
