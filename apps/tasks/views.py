@@ -1,6 +1,7 @@
 from django.db import models
 from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
+from config.settings import CACHE_TTL
 
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -9,10 +10,9 @@ from drf_yasg.utils import swagger_auto_schema, no_body
 
 from apps.tasks import serializers
 from apps.tasks.models import Task, TimeLog, Status, Comment
+from apps.tasks import tasks
 
 import datetime
-
-from config.settings import CACHE_TTL
 
 
 class TaskViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.DestroyModelMixin,
@@ -23,7 +23,7 @@ class TaskViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Retriev
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user)
-            return Response({'id': serializer.data.get('id')}, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -41,37 +41,19 @@ class TaskViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Retriev
 
     @action(detail=True, methods=['put'], description='Assign a task to a user')
     def assign(self, request, **kwargs):
-        instance = generics.get_object_or_404(self.get_queryset(), id=kwargs.get('pk'))
-        serializer = self.get_serializer(instance=instance, data={'user': request.data.get('user')}, partial=True)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        else:
-            Response(serializer.errors)
+        tasks.assign_task(kwargs.get('pk'), request.data.get('user'), self.get_serializer_class(), self.get_queryset())
+        return Response({'message': 'successful'}, status=status.HTTP_200_OK)
 
     @action(detail=True, methods=['put'])
     def update_status(self, request, **kwargs):
-        instance = generics.get_object_or_404(self.get_queryset(), id=kwargs.get('pk'))
-        serializer = self.get_serializer(instance, data=request.data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        else:
-            Response(serializer.errors)
+        tasks.update_task_status(kwargs.get('pk'), request.data, self.get_serializer_class(), self.get_queryset())
+        return Response({'message': 'successful'}, status=status.HTTP_200_OK)
 
     @swagger_auto_schema(request_body=no_body)
     @action(detail=True, methods=['put'])
     def complete(self, request, **kwargs):
-        instance = generics.get_object_or_404(self.get_queryset(), id=kwargs.get('pk'))
-        serializer = self.get_serializer(instance, data={'status_field': Status.DONE}, partial=True)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        else:
-            Response(serializer.errors)
+        tasks.complete_task(kwargs.get('pk'), self.get_serializer_class(), self.get_queryset())
+        return Response({'message': 'successful'}, status=status.HTTP_200_OK)
 
     @swagger_auto_schema(query_serializer=serializers.ListTaskSerializer())
     @action(detail=False, methods=['get'])
