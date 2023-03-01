@@ -1,7 +1,8 @@
 import datetime
 
 from rest_framework import serializers
-from apps.tasks.models import Task, Comment, TimeLog
+from rest_framework_mongoengine import serializers as mongo_serializers
+from apps.tasks.models import Task, Comment, TimeLog, Goal
 from apps.users.serializers import UserReadSerializer
 
 
@@ -97,3 +98,9 @@ class ScheduleTimeLogSerializer(serializers.ModelSerializer):
         model = TimeLog
         fields = ('id', 'task', 'stop')
         read_only = ('id',)
+
+
+class GoalSerializer(mongo_serializers.DocumentSerializer):
+    class Meta:
+        model = Goal
+        fields = '__all__'

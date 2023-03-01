@@ -1,6 +1,45 @@
 # Django app compose
 
 services:
+  web:
+    container_name: django_container
+    build: .
+    environment:
+      - REDIS_HOST=redis
+      - POSTGRES_NAME=milestones
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_HOST=db
+      - MONGO_USERNAME=root
+      - MONGO_PASSWORD=rootpassword
+      - MONGO_HOST=mongodb
+      - MONGO_NAME=milestones
+    volumes:
+      - .:/app
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
+      - redis
+      - mongodb
+
+  redis:
+    container_name: redis_container
+    image: redis
+    restart: always
+    ports:
+      - '6379:6379'
+
+  mongodb:
+    container_name: mongodb_container
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - '27017:27017'
+
   db:
     container_name: postgres_container
     image: postgres
@@ -13,26 +52,6 @@ services:
     ports:
       - '5432:5432'
 
-
-  web:
-    container_name: django_container
-    build: .
-    environment:
-      - REDIS_HOST=redis
-      - POSTGRES_NAME=milestones
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_PORT=5432
-      - POSTGRES_HOST=db
-    volumes:
-      - .:/app
-    ports:
-      - '8000:8000'
-    depends_on:
-      - db
-      - redis
-
-
   pgadmin:
     container_name: pgadmin4_container
     image: dpage/pgadmin4
@@ -42,15 +61,6 @@ services:
       PGADMIN_DEFAULT_PASSWORD: root
     ports:
       - "5050:80"
-
-
-  redis:
-    container_name: redis_container
-    image: redis
-    restart: always
-    ports:
-      - '6379:6379'
-
 
   pghero:
     container_name: pghero

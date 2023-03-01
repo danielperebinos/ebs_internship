@@ -1,6 +1,8 @@
 from django.db import models
 from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
+from rest_framework.permissions import AllowAny
+
 from config.settings import CACHE_TTL
 
 from rest_framework.response import Response
@@ -8,8 +10,10 @@ from rest_framework.decorators import action
 from rest_framework import generics, viewsets, mixins, status
 from drf_yasg.utils import swagger_auto_schema, no_body
 
+from rest_framework_mongoengine.viewsets import ModelViewSet as Mongo_ModelViewSet, GenericViewSet
+
 from apps.tasks import serializers
-from apps.tasks.models import Task, TimeLog, Status, Comment
+from apps.tasks.models import Task, TimeLog, Status, Comment, Goal
 from apps.tasks import tasks
 
 import datetime
@@ -213,3 +217,10 @@ class TimeLogViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.Ge
         if self.action == 'create':
             return serializers.CreateTimeLogSerializer
         return serializers.TimeLogSerializer
+
+
+class GoalViewSet(Mongo_ModelViewSet):
+    serializer_class = serializers.GoalSerializer
+    queryset = Goal.objects.all()
+    permission_classes = (AllowAny, )
+

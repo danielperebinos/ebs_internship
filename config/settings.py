@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from decouple import config
 from pathlib import Path
 import os
+import mongoengine
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     # Third party apps
     "rest_framework",
     "rest_framework.authtoken",
+    "rest_framework_mongoengine",
     "corsheaders",
     "drf_yasg",
     'huey.contrib.djhuey',
@@ -271,3 +273,13 @@ HUEY = {
         'health_check_interval': 1,  # Check worker health every second.
     },
 }
+
+MONGO_USERNAME = os.environ.get('MONGO_USERNAME', config('MONGO_USERNAME'))
+MONGO_PASSWORD = os.environ.get('MONGO_PASSWORD', config('MONGO_PASSWORD'))
+MONGO_HOST = os.environ.get('MONGO_HOST', config('MONGO_HOST'))
+MONGO_PORT = os.environ.get('MONGO_PORT', config('MONGO_PORT'))
+
+MONGO_NAME = 'milestones'
+MONGO_DATABASE_HOST = f'mongodb://{MONGO_USERNAME}:{MONGO_PASSWORD}@{MONGO_HOST}:{MONGO_PORT}/{MONGO_NAME}?authSource=admin&retryWrites=true&w=majority'
+
+mongoengine.connect(db=MONGO_NAME, host=MONGO_DATABASE_HOST)

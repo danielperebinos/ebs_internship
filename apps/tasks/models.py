@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 import datetime
 from django.core.mail import send_mail
 from django.utils import timezone
+from mongoengine import Document, EmbeddedDocument, fields
 
 
 def custom_send_email(body, receivers):
@@ -65,3 +66,8 @@ class TimeLog(models.Model):
             year = today.year - 1
 
         return prev_month, year
+
+
+class Goal(Document):
+    text = fields.StringField()
+    relevancy = fields.IntField()
