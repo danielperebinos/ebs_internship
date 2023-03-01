@@ -142,9 +142,7 @@ class TimeLogViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.Ge
     @action(detail=False, methods=['put'])
     def stop(self, request, *args, **kwargs):
         pk = request.query_params.get('task')
-
         instance = generics.get_object_or_404(self.get_queryset(), task=pk, user=request.user.id, duration=0)
-
         duration = (datetime.datetime.now() - instance.start.replace(tzinfo=None)).seconds // 60
 
         serializer = self.get_serializer(instance=instance,
@@ -156,6 +154,34 @@ class TimeLogViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.Ge
             return Response(data=serializer.data)
         else:
             return Response(data=serializer.errors)
+
+    @swagger_auto_schema(request_body=no_body, query_serializer=serializers.ScheduleTimeLogSerializer())
+    @action(detail=False, methods=['put'])
+    def schedule_stop(self, request, *args, **kwargs):
+        stop = request.query_params.get('stop')
+        if type(stop) is str:
+            stop = datetime.datetime.fromisoformat(stop)
+
+        for task in tasks.scheduled():
+            if (not tasks.is_revoked(task)) and (task.args[0] == request.query_params.get('task')) and (
+                    task.args[1] == request.user):
+                tasks.revoke(task)
+
+        tasks.schedule_stop_timer_task.schedule(
+            args=(request.query_params.get('task'), request.user, self.get_queryset()), eta=stop)
+
+        print(tasks.scheduled())
+
+        return Response({'message': 'success'}, status=status.HTTP_200_OK)
+
+    @swagger_auto_schema(request_body=no_body, query_serializer=serializers.ScheduleTimeLogSerializer())
+    @action(detail=False, methods=['delete'])
+    def delete_schedule(self, request, *args, **kwargs):
+        for task in tasks.scheduled():
+            if (not tasks.is_revoked(task)) and (task.args[0] == request.query_params.get('task')) and (
+                    task.args[1] == request.user):
+                tasks.revoke(task)
+        return Response({'message': 'success'}, status=status.HTTP_200_OK)
 
     @swagger_auto_schema(query_serializer=serializers.GetTaskTimeLogSerializer(), request_body=no_body)
     def list(self, request, *args, **kwargs):

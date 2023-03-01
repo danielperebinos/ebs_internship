@@ -26,7 +26,7 @@ FIXTURE_DIRS = ("fixtures/",)
 SECRET_KEY = 'django-insecure-kc(*$=#9iv=5ux7vts5if_dszkhu+%9_*z@_7s*w0r#r@u878%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -245,7 +245,7 @@ HUEY = {
     'name': DATABASES['default']['NAME'],  # Use db name for huey.
     'results': True,  # Store return values of tasks.
     'store_none': False,  # If a task returns None, do not save to results.
-    'immediate': DEBUG,  # If DEBUG=True, run synchronously.
+    'immediate': False,  # If DEBUG=True, run synchronously.
     'utc': True,  # Use UTC for all times internally.
     'blocking': True,  # Perform blocking pop rather than poll Redis.
     'connection': {

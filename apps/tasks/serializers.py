@@ -1,3 +1,5 @@
+import datetime
+
 from rest_framework import serializers
 from apps.tasks.models import Task, Comment, TimeLog
 from apps.users.serializers import UserReadSerializer
@@ -85,4 +87,13 @@ class GetTaskTimeLogSerializer(serializers.ModelSerializer):
     class Meta:
         model = TimeLog
         fields = ('id', 'task')
+        read_only = ('id',)
+
+
+class ScheduleTimeLogSerializer(serializers.ModelSerializer):
+    stop = serializers.DateTimeField()
+
+    class Meta:
+        model = TimeLog
+        fields = ('id', 'task', 'stop')
         read_only = ('id',)
