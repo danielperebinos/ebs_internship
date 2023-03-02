@@ -15,6 +15,8 @@ from pathlib import Path
 import os
 import mongoengine
 
+import apps.tasks.tests_runners
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -47,6 +49,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "drf_yasg",
     'huey.contrib.djhuey',
+    'fixtures_mongoengine',
     # Local apps
     'apps.common',
     'apps.users',
@@ -281,5 +284,9 @@ MONGO_PORT = os.environ.get('MONGO_PORT', config('MONGO_PORT'))
 
 MONGO_NAME = 'milestones'
 MONGO_DATABASE_HOST = f'mongodb://{MONGO_USERNAME}:{MONGO_PASSWORD}@{MONGO_HOST}:{MONGO_PORT}/{MONGO_NAME}?authSource=admin&retryWrites=true&w=majority'
+MONGO_TEST_NAME = 'test'
+MONGO_TEST_DATABASE_HOST = f'mongodb://{MONGO_USERNAME}:{MONGO_PASSWORD}@{MONGO_HOST}:{MONGO_PORT}/{MONGO_TEST_NAME}?authSource=admin&retryWrites=true&w=majority'
 
 mongoengine.connect(db=MONGO_NAME, host=MONGO_DATABASE_HOST)
+
+TEST_RUNNER = 'apps.tasks.tests_runners.CustomTestRunner'

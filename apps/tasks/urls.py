@@ -15,3 +15,4 @@ mongo_router.register(r'goals', views.GoalViewSet)
 urlpatterns = []
 urlpatterns += router.urls
 urlpatterns += mongo_router.urls
+print(mongo_router.urls)

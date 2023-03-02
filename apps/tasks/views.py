@@ -222,5 +222,5 @@ class TimeLogViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.Ge
 class GoalViewSet(Mongo_ModelViewSet):
     serializer_class = serializers.GoalSerializer
     queryset = Goal.objects.all()
-    permission_classes = (AllowAny, )
+    # permission_classes = (AllowAny, )
 

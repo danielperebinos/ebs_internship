@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal" created-in="PY-223.8617.48">
-    <data-source name="@localhost" uuid="43442a47-7076-468c-a1a1-3f57f7d422c4">
+    <data-source name="@mongodb" uuid="57484ab7-5ae4-44d1-afab-a8e609ce4f21">
       <database-info product="Mongo DB" version="6.0.4" jdbc-version="4.2" driver-name="MongoDB JDBC Driver" driver-version="1.18" dbms="MONGO" exact-version="6.0.4" exact-driver-version="1.18" />
       <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <secret-storage>session</secret-storage>
       <user-name>root</user-name>
       <schema-mapping>
         <introspection-scope>

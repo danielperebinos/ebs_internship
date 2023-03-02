@@ -4,18 +4,77 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4cb3d69-0b22-4be6-96c4-26d95d5c0a8e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+    <list default="true" id="f4cb3d69-0b22-4be6-96c4-26d95d5c0a8e" name="Changes" comment="added mongodb db">
+      <change afterPath="$PROJECT_DIR$/apps/tasks/fixtures/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.coverage" beforeDir="false" afterPath="$PROJECT_DIR$/.coverage" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/43442a47-7076-468c-a1a1-3f57f7d422c4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/43442a47-7076-468c-a1a1-3f57f7d422c4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/43442a47-7076-468c-a1a1-3f57f7d422c4/storage_v2/_src_/schema/test.kkQ2AA.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/43442a47-7076-468c-a1a1-3f57f7d422c4/storage_v2/_src_/schema/test.kkQ2AA.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/milestone2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/milestone2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/common/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/common/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/common/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/common/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/common/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/common/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/common/exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/common/exceptions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/common/fixtures/blogs.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/common/fixtures/blogs.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/common/fixtures/categories.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/common/fixtures/categories.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/common/fixtures/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/common/fixtures/users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/common/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/common/helpers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/common/middlewares.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/common/middlewares.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/common/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/common/migrations/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/common/permissions.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/common/permissions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/common/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/common/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/common/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/common/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/common/validators.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/common/validators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/common/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/common/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/fixtures/comment.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/fixtures/comment.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/fixtures/task.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/fixtures/task.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/fixtures/timelog.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/fixtures/timelog.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/fixtures/user.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/fixtures/user.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/management/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/management/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/management/commands/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/management/commands/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/management/commands/filldb.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/management/commands/filldb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/migrations/0002_comment.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/migrations/0002_comment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/migrations/0003_timelog.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/migrations/0003_timelog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/migrations/0004_alter_timelog_start.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/migrations/0004_alter_timelog_start.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/migrations/0005_alter_timelog_start.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/migrations/0005_alter_timelog_start.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/migrations/0006_alter_timelog_start.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/migrations/0006_alter_timelog_start.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/migrations/0007_alter_timelog_start.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/migrations/0007_alter_timelog_start.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/migrations/0008_alter_timelog_start.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/migrations/0008_alter_timelog_start.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/migrations/0009_alter_timelog_start.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/migrations/0009_alter_timelog_start.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/migrations/0010_alter_timelog_start.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/migrations/0010_alter_timelog_start.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/migrations/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/tasks/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/tasks/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/signals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/migrations/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/asgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/asgi.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/wsgi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pghero.yml" beforeDir="false" afterPath="$PROJECT_DIR$/pghero.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,16 +85,25 @@
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/.env" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/apps/tasks/models.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/apps/tasks/serializers.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/apps/tasks/urls.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/apps/tasks/views.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/config/settings.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/docker-compose.yml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/venv/lib/python3.8/site-packages/django/test/runner.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -45,26 +113,86 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/daniel.perebinos@internal.ebs.md/PycharmProjects/milestone2",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.grazie",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/daniel.perebinos@internal.ebs.md/PycharmProjects/milestone2&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.grazie&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "documentdb"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;documentdb&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Django tests.tasks">
+    <configuration name="Test: apps.tasks.tests.GoalViewTest.test_list_goals" type="DjangoTestsConfigurationType" temporary="true">
+      <module name="milestone2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="apps.tasks.tests.GoalViewTest.test_list_goals" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test: apps.tasks.tests.GoalViewTest.test_retrieve_goal" type="DjangoTestsConfigurationType" temporary="true">
+      <module name="milestone2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="apps.tasks.tests.GoalViewTest.test_retrieve_goal" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test: apps.tasks.tests.GoalViewTest.test_update_goal" type="DjangoTestsConfigurationType" temporary="true">
+      <module name="milestone2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="apps.tasks.tests.GoalViewTest.test_update_goal" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="tasks" type="DjangoTestsConfigurationType">
       <module name="milestone2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -96,13 +224,10 @@
       <option name="OPTIONS" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="manage" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+    <configuration name="django shell" type="PythonConfigurationType" factoryName="Python">
       <module name="milestone2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
       <option name="SDK_NAME" value="Python 3.8 (milestone2)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -122,14 +247,14 @@
       </EXTENSION>
       <option name="SCRIPT_NAME" value="manage.py" />
       <option name="PARAMETERS" value="shell" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="milestone2" type="Python.DjangoServer" factoryName="Django server">
+    <configuration name="django server" type="Python.DjangoServer" factoryName="Django server">
       <module name="milestone2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -184,13 +309,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Django Server.milestone2" />
+      <item itemvalue="Django Server.django server" />
       <item itemvalue="Django tests.tasks" />
+      <item itemvalue="Django tests.Test: apps.tasks.tests.GoalViewTest.test_list_goals" />
+      <item itemvalue="Django tests.Test: apps.tasks.tests.GoalViewTest.test_retrieve_goal" />
+      <item itemvalue="Django tests.Test: apps.tasks.tests.GoalViewTest.test_update_goal" />
       <item itemvalue="Docker.docker-compose.yml.mongodb: Compose Deployment" />
-      <item itemvalue="Python.manage" />
+      <item itemvalue="Python.django shell" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Django tests.Test: apps.tasks.tests.GoalViewTest.test_list_goals" />
+        <item itemvalue="Django tests.Test: apps.tasks.tests.GoalViewTest.test_retrieve_goal" />
+        <item itemvalue="Django tests.Test: apps.tasks.tests.GoalViewTest.test_update_goal" />
         <item itemvalue="Docker.docker-compose.yml.mongodb: Compose Deployment" />
       </list>
     </recent_temporary>
@@ -206,15 +337,47 @@
       <workItem from="1677662022489" duration="313000" />
       <workItem from="1677662342215" duration="382000" />
       <workItem from="1677662870010" duration="2642000" />
-      <workItem from="1677665624239" duration="3680000" />
+      <workItem from="1677665624239" duration="3998000" />
+      <workItem from="1677741270377" duration="15138000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added mongodb db" />
+    <option name="LAST_COMMIT_MESSAGE" value="added mongodb db" />
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/milestone2$Test__apps_tasks_tests_GoalViewTest_test_list_goals.coverage" NAME="Test: apps.tasks.tests.GoalViewTest.test_list_goals Coverage Results" MODIFIED="1677758449100" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/milestone2$Test__apps_tasks_tests_GoalViewTest_test_update_goal.coverage" NAME="Test: apps.tasks.tests.GoalViewTest.test_update_goal Coverage Results" MODIFIED="1677757437680" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/milestone2$django_shell.coverage" NAME="django shell Coverage Results" MODIFIED="1677745008436" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/milestone2$Test__apps_tasks_tests_GoalViewTest_test_retrieve_goal.coverage" NAME="Test: apps.tasks.tests.GoalViewTest.test_retrieve_goal Coverage Results" MODIFIED="1677758093774" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/milestone2$manage.coverage" NAME="manage Coverage Results" MODIFIED="1677670996778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/milestone2$tasks.coverage" NAME="tasks Coverage Results" MODIFIED="1677672108503" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/milestone2$tasks.coverage" NAME="tasks Coverage Results" MODIFIED="1677759231371" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

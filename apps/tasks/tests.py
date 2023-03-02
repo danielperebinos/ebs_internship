@@ -1,12 +1,14 @@
 from django.urls import reverse
 from django.test import TestCase
 from django.db import models
+from fixtures_mongoengine import FixturesMixin
 from rest_framework.test import APIClient
 
 from django.contrib.auth.models import User
 
 from apps.tasks import serializers
-from apps.tasks.models import Comment, Task, TimeLog, Status
+from apps.tasks.models import Comment, Task, TimeLog, Status, Goal
+from apps.tasks.fixtures.goal import FixtureGoal
 
 
 class CommentViewTest(TestCase):
@@ -208,3 +210,77 @@ class TimeLogViewTest(TestCase):
         time = sum(durations)
 
         self.assertEqual(response.json().get('duration'), time)
+
+
+class GoalViewTest(TestCase, FixturesMixin):
+    fixtures = ['user.json']
+    fixtures_conf = {
+        'goals': FixtureGoal
+    }
+
+    def setUp(self) -> None:
+        self.client = APIClient()
+        self.user = User.objects.get(username="users")
+        self.client.force_authenticate(user=self.user)
+
+    def test_list_goals(self):
+        url = reverse('goal-list')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        serializer = serializers.GoalSerializer(Goal.objects(), many=True)
+        self.assertEqual(response.data, serializer.data)
+
+    def test_create_goal(self):
+        url = reverse('goal-list')
+        goal = {
+            'text': 'string string string',
+            'relevancy': 2
+        }
+        response = self.client.post(url, data=goal)
+        self.assertEqual(response.status_code, 201)
+
+        id = response.json().get('id')
+        serializer = serializers.GoalSerializer(Goal.objects.get(id=id))
+
+        self.assertEqual(response.data, serializer.data)
+
+    def test_retrieve_goal(self):
+        goal_id = Goal.objects.first().id
+        url = reverse('goal-detail', kwargs={'id': goal_id})
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_update_goal_put(self):
+        goal = Goal.objects.first()
+        url = reverse('goal-detail', kwargs={'id': goal.id})
+        data = {
+            'relevancy': 10
+        }
+
+        response = self.client.put(url, data=data)
+        self.assertEqual(response.status_code, 200)
+        serializer = serializers.GoalSerializer(Goal.objects.first())
+        self.assertEqual(response.data, serializer.data)
+
+    def test_update_goal_patch(self):
+        goal = Goal.objects.first()
+        url = reverse('goal-detail', kwargs={'id': goal.id})
+        data = {
+            'relevancy': 10
+        }
+
+        response = self.client.patch(url, data=data)
+        self.assertEqual(response.status_code, 200)
+        serializer = serializers.GoalSerializer(Goal.objects.first())
+        self.assertEqual(response.data, serializer.data)
+
+    def test_delete_goal(self):
+        goal = Goal.objects.first()
+        url = reverse('goal-detail', kwargs={'id': goal.id})
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, 204)
+
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
