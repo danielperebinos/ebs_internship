@@ -64,6 +64,13 @@ class TaskCommentSerializer(serializers.ModelSerializer):
         read_only = ('id',)
 
 
+class SimpleCommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ('id', 'text')
+        read_only = ('id',)
+
+
 ######################
 # Time Logs
 class TimeLogSerializer(serializers.ModelSerializer):

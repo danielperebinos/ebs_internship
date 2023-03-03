@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 import datetime
 from django.core.mail import send_mail
 from django.utils import timezone
-from mongoengine import Document, EmbeddedDocument, fields
+from mongoengine import Document, fields
 
 
 def custom_send_email(body, receivers):

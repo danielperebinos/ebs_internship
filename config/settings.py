@@ -14,6 +14,7 @@ from decouple import config
 from pathlib import Path
 import os
 import mongoengine
+from drf_util import elastic
 
 import apps.tasks.tests_runners
 
@@ -290,3 +291,8 @@ MONGO_TEST_DATABASE_HOST = f'mongodb://{MONGO_USERNAME}:{MONGO_PASSWORD}@{MONGO_
 mongoengine.connect(db=MONGO_NAME, host=MONGO_DATABASE_HOST)
 
 TEST_RUNNER = 'apps.tasks.tests_runners.CustomTestRunner'
+
+ELASTIC_HOST = os.environ.get('ELASTICSEARCH_HOSTS', f'{config("ELASTIC_HOST")}:{config("ELASTIC_PORT")}')
+
+elastic.ElasticUtil.hosts = [ELASTIC_HOST]
+es = elastic.ElasticUtil()

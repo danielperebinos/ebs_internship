@@ -3,14 +3,14 @@ from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
 from rest_framework.permissions import AllowAny
 
-from config.settings import CACHE_TTL
+from config.settings import CACHE_TTL, es
 
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework import generics, viewsets, mixins, status
 from drf_yasg.utils import swagger_auto_schema, no_body
 
-from rest_framework_mongoengine.viewsets import ModelViewSet as Mongo_ModelViewSet, GenericViewSet
+from rest_framework_mongoengine.viewsets import ModelViewSet as Mongo_ModelViewSet
 
 from apps.tasks import serializers
 from apps.tasks.models import Task, TimeLog, Status, Comment, Goal
@@ -109,6 +109,18 @@ class CommentViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.Ge
     @swagger_auto_schema(query_serializer=serializers.TaskCommentSerializer())
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
+
+    @swagger_auto_schema(query_serializer=serializers.SimpleCommentSerializer())
+    @action(detail=False, methods=['get'])
+    def search_by_text(self, request, *args, **kwargs):
+        text = request.query_params.get('text')
+        body = {
+            "query": {
+                "bool": {"must": {"match_phrase": {"text": text}}}
+            }
+        }
+        results = es.search(index='text', body=body)[0]
+        return Response({'comments': [comment['_source'] for comment in results if '_source' in comment.keys()]})
 
     def filter_queryset(self, queryset):
         task = self.request.query_params.get('task')
@@ -222,5 +234,3 @@ class TimeLogViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.Ge
 class GoalViewSet(Mongo_ModelViewSet):
     serializer_class = serializers.GoalSerializer
     queryset = Goal.objects.all()
-    # permission_classes = (AllowAny, )
-
