@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4cb3d69-0b22-4be6-96c4-26d95d5c0a8e" name="Changes" comment="Implimented Elastic comment search">
+    <list default="true" id="f4cb3d69-0b22-4be6-96c4-26d95d5c0a8e" name="Changes" comment="Updated elastic and Implimented test for Elastic comment search">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/tasks/elastic.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/elastic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/tasks/fixtures/comment.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/fixtures/comment.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/tasks/management/commands/indexComments.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/management/commands/indexComments.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/tasks/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/signals.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/tasks/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/tasks/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,11 +60,12 @@
   "keyToStringList": {
     "DatabaseDriversLRU": [
       "documentdb",
-      "elasticsearch"
+      "elasticsearch",
+      "redis"
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="Django tests.tasks">
+  <component name="RunManager" selected="Python.countries">
     <configuration name="Test: apps.tasks.tests.GoalViewTest.test_list_goals" type="DjangoTestsConfigurationType" temporary="true">
       <module name="milestone2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -160,6 +155,28 @@
       <option name="CUSTOM_SETTINGS" value="false" />
       <option name="USE_OPTIONS" value="false" />
       <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="countries" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="milestone2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/countries.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="django shell" type="PythonConfigurationType" factoryName="Python">
@@ -288,9 +305,11 @@
       <item itemvalue="Docker.docker-compose.yml.mongodb: Compose Deployment" />
       <item itemvalue="Python.update_indexes" />
       <item itemvalue="Python.django shell" />
+      <item itemvalue="Python.countries" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.countries" />
         <item itemvalue="Django tests.Test: apps.tasks.tests.GoalViewTest.test_list_goals" />
         <item itemvalue="Django tests.Test: apps.tasks.tests.GoalViewTest.test_retrieve_goal" />
         <item itemvalue="Django tests.Test: apps.tasks.tests.GoalViewTest.test_update_goal" />
@@ -311,7 +330,8 @@
       <workItem from="1677662870010" duration="2642000" />
       <workItem from="1677665624239" duration="3998000" />
       <workItem from="1677741270377" duration="21543000" />
-      <workItem from="1677827086597" duration="15652000" />
+      <workItem from="1677827086597" duration="16849000" />
+      <workItem from="1677850254060" duration="4330000" />
     </task>
     <task id="LOCAL-00001" summary="added tests for mongodb endpoints. added custom test_runner.">
       <created>1677759326588</created>
@@ -327,7 +347,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677837330242</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Updated elastic and Implimented test for Elastic comment search">
+      <created>1677846832989</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1677846832989</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -360,7 +387,8 @@
     <MESSAGE value="added mongodb db" />
     <MESSAGE value="added tests for mongodb endpoints. added custom test_runner." />
     <MESSAGE value="Implimented Elastic comment search" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implimented Elastic comment search" />
+    <MESSAGE value="Updated elastic and Implimented test for Elastic comment search" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated elastic and Implimented test for Elastic comment search" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/milestone2$Test__apps_tasks_tests_GoalViewTest_test_list_goals.coverage" NAME="Test: apps.tasks.tests.GoalViewTest.test_list_goals Coverage Results" MODIFIED="1677758449100" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
@@ -369,6 +397,7 @@
     <SUITE FILE_PATH="coverage/milestone2$Test__apps_tasks_tests_GoalViewTest_test_retrieve_goal.coverage" NAME="Test: apps.tasks.tests.GoalViewTest.test_retrieve_goal Coverage Results" MODIFIED="1677758093774" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/milestone2$manage.coverage" NAME="manage Coverage Results" MODIFIED="1677670996778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/milestone2$tasks.coverage" NAME="tasks Coverage Results" MODIFIED="1677846727476" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/milestone2$countries.coverage" NAME="countries Coverage Results" MODIFIED="1677854536616" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/milestone2$update_indexes.coverage" NAME="update_indexes Coverage Results" MODIFIED="1677844633863" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
