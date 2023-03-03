@@ -293,6 +293,5 @@ mongoengine.connect(db=MONGO_NAME, host=MONGO_DATABASE_HOST)
 TEST_RUNNER = 'apps.tasks.tests_runners.CustomTestRunner'
 
 ELASTIC_HOST = os.environ.get('ELASTICSEARCH_HOSTS', f'{config("ELASTIC_HOST")}:{config("ELASTIC_PORT")}')
-
-elastic.ElasticUtil.hosts = [ELASTIC_HOST]
-es = elastic.ElasticUtil()
+ELASTIC_INDEX_PREFIX = 'milestones'
+ELASTIC_TEST_INDEX_PREFIX = 'test'

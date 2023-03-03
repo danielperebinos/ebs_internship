@@ -32,6 +32,7 @@ def send_email_to_task_owner_trigger(sender, instance, **kwargs):
         except Exception:
             current.send_email_to_task_owner()
 
+
 @receiver(post_save, sender=Comment)
 def index_comment_in_es(sender, instance, **kwargs):
     upload_comment_to_elastic(instance)

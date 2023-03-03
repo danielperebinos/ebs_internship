@@ -12,7 +12,7 @@
     "model": "tasks.comment",
     "id": 2,
     "fields": {
-        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent placerat a erat id suscipit. Praesent ut arcu in ex finibus.",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rhoncus massa quam, vitae commodo dui congue eget. Nunc non elit quis lorem aliquam convallis. Aenean bibendum, mauris eu molestie tempor, nisl mi egestas neque, ut.",
         "task": 1,
         "user": 1
     }

@@ -1,3 +1,6 @@
+from time import sleep
+
+from django.conf import settings
 from django.urls import reverse
 from django.test import TestCase
 from django.db import models
@@ -5,10 +8,12 @@ from fixtures_mongoengine import FixturesMixin
 from rest_framework.test import APIClient
 
 from django.contrib.auth.models import User
+from django.core.management import call_command
 
 from apps.tasks import serializers
 from apps.tasks.models import Comment, Task, TimeLog, Status, Goal
 from apps.tasks.fixtures.goal import FixtureGoal
+from config.elastic import es
 
 
 class CommentViewTest(TestCase):
@@ -284,3 +289,37 @@ class GoalViewTest(TestCase, FixturesMixin):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
 
+
+class ElasticSearchTest(TestCase):
+    fixtures = ['user.json', 'task.json', 'comment.json']
+
+    def setUp(self) -> None:
+        self.client = APIClient()
+        self.user = User.objects.get(username="users")
+        self.client.force_authenticate(user=self.user)
+
+        self.es = es
+        self.es.index_prefix = settings.ELASTIC_TEST_INDEX_PREFIX
+        self.es.build_index_names()
+        self.es.init_indexes()
+        call_command('indexComments', '--drop')
+        sleep(1)
+
+    def tearDown(self) -> None:
+        es.session.indices.delete(es.text_index)
+        self.es.index_prefix = settings.ELASTIC_INDEX_PREFIX
+        self.es.build_index_names()
+
+    def test_indexes(self):
+        self.assertIn(self.es.text_index, self.es.session.indices.get('*').keys())
+
+    def test_search_by_text(self):
+        url = reverse('comment-search-by-text')
+        data = {'text': 'finibus'}
+
+        response = self.client.get(url, data=data)
+        self.assertEqual(response.status_code, 200)
+
+        comments = Comment.objects.filter(text__contains=data['text'])
+        serializer = serializers.CommentSerializer(comments, many=True)
+        self.assertEqual([dict(element) for element in serializer.data], response.data.get('comments'))

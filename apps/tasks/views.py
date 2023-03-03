@@ -3,7 +3,8 @@ from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
 from rest_framework.permissions import AllowAny
 
-from config.settings import CACHE_TTL, es
+from django.conf import settings
+from config.elastic import es
 
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -67,7 +68,7 @@ class TaskViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Retriev
         serializer = self.get_serializer(searched_tasks, many=True)
         return Response(serializer.data)
 
-    @method_decorator(cache_page(CACHE_TTL))
+    @method_decorator(cache_page(settings.CACHE_TTL))
     @action(detail=False, methods=['get'])
     def top_20(self, request, *args, **kwargs):
         tasks = self.get_queryset().values('id', 'title').annotate(duration=models.Sum('timelog__duration')).order_by(
@@ -119,7 +120,7 @@ class CommentViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.Ge
                 "bool": {"must": {"match_phrase": {"text": text}}}
             }
         }
-        results = es.search(index='text', body=body)[0]
+        results = es.search(index=es.text_index, body=body)[0]
         return Response({'comments': [comment['_source'] for comment in results if '_source' in comment.keys()]})
 
     def filter_queryset(self, queryset):
