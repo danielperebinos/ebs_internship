@@ -1,9 +1,11 @@
 import pycountry
 import gettext
-from django.core.cache import cache
+
 from django.conf import settings
 
 settings.configure()
+
+from django.core.cache import cache
 
 
 class CountryData:
@@ -21,7 +23,7 @@ class CountryData:
             _ = lang.gettext
             names[language] = _(country.name)
 
-        return {'name_language': names}
+        return names
 
     def get_country_info(self, country):
         return {
@@ -30,6 +32,7 @@ class CountryData:
         }
 
     def __create_dict(self):
+        self.__data = []
         for country in list(pycountry.countries):
             country_info = self.get_country_info(country)
             country_info['name_language'] = self.translate_country(country)
@@ -37,16 +40,11 @@ class CountryData:
         return self.__data
 
     def get_data(self):
-        if self.__data == []:
+        if not self.__data:
             from_cache = cache.get(self.CACHE_KEY)
-            print(from_cache)
-            if not from_cache:
-                print('Created')
+            if from_cache is None:
                 self.__data = self.__create_dict()
-                cache.set(self.CACHE_KEY, self.__data, 60 * 5)
             else:
-                print('From cache')
                 self.__data = from_cache
 
-        print('Local')
         return self.__data
