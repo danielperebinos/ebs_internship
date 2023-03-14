@@ -9,6 +9,7 @@ from rest_framework.test import APIClient
 
 from django.contrib.auth.models import User
 from django.core.management import call_command
+from django.utils.translation import gettext_lazy as _
 
 from apps.tasks import serializers
 from apps.tasks.models import Comment, Task, TimeLog, Status, Goal
@@ -323,3 +324,24 @@ class ElasticSearchTest(TestCase):
         comments = Comment.objects.filter(text__contains=data['text'])
         serializer = serializers.CommentSerializer(comments, many=True)
         self.assertEqual([dict(element) for element in serializer.data], response.data.get('comments'))
+
+
+class LocalTranslationTest(TestCase):
+    fixtures = ['user.json']
+
+    def setUp(self) -> None:
+        self.client = APIClient()
+        self.user = User.objects.get(username="users")
+        self.client.force_authenticate(user=self.user)
+
+    def test_success_message_ro(self):
+        path = reverse('anonim')
+
+        response_en = self.client.get(path, HTTP_ACCEPT_LANGUAGE='en')
+        self.assertEqual(response_en.status_code, 200)
+
+        response_ro = self.client.get(path, HTTP_ACCEPT_LANGUAGE='ro')
+        self.assertEqual(response_ro.status_code, 200)
+
+        self.assertEqual(response_ro.data['message'], _(response_en.data['message']))
+        self.assertEqual(response_ro.data['probe text'], _(response_en.data['probe text']))

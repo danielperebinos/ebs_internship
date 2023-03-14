@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4cb3d69-0b22-4be6-96c4-26d95d5c0a8e" name="Changes" comment="Added country data">
+    <list default="true" id="f4cb3d69-0b22-4be6-96c4-26d95d5c0a8e" name="Changes" comment="Added caching country data">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/tasks/countries.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/countries.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/tasks/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/tasks/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,33 +47,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/daniel.perebinos@internal.ebs.md/PycharmProjects/milestone2",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.grazie",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/daniel.perebinos@internal.ebs.md/PycharmProjects/milestone2&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.grazie&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "documentdb",
-      "elasticsearch",
-      "redis"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;documentdb&quot;,
+      &quot;elasticsearch&quot;,
+      &quot;redis&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/apps/tasks" />
     </key>
   </component>
-  <component name="RunManager" selected="Django Server.django server">
+  <component name="RunManager" selected="Django tests.tasks">
     <configuration name="Test: apps.tasks.tests.GoalViewTest.test_list_goals" type="DjangoTestsConfigurationType" temporary="true">
       <module name="milestone2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -189,6 +191,9 @@
       <module name="milestone2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
       <option name="SDK_NAME" value="Python 3.8 (milestone2)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -337,7 +342,8 @@
       <workItem from="1677665624239" duration="3998000" />
       <workItem from="1677741270377" duration="21543000" />
       <workItem from="1677827086597" duration="16849000" />
-      <workItem from="1677850254060" duration="7231000" />
+      <workItem from="1677850254060" duration="10107000" />
+      <workItem from="1678782533371" duration="4243000" />
     </task>
     <task id="LOCAL-00001" summary="added tests for mongodb endpoints. added custom test_runner.">
       <created>1677759326588</created>
@@ -367,7 +373,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677854627259</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added caching country data">
+      <created>1678778943639</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1678778943639</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -402,7 +415,8 @@
     <MESSAGE value="Implimented Elastic comment search" />
     <MESSAGE value="Updated elastic and Implimented test for Elastic comment search" />
     <MESSAGE value="Added country data" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added country data" />
+    <MESSAGE value="Added caching country data" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added caching country data" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/milestone2$Test__apps_tasks_tests_GoalViewTest_test_list_goals.coverage" NAME="Test: apps.tasks.tests.GoalViewTest.test_list_goals Coverage Results" MODIFIED="1677758449100" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
@@ -410,8 +424,8 @@
     <SUITE FILE_PATH="coverage/milestone2$django_shell.coverage" NAME="django shell Coverage Results" MODIFIED="1677745008436" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/milestone2$Test__apps_tasks_tests_GoalViewTest_test_retrieve_goal.coverage" NAME="Test: apps.tasks.tests.GoalViewTest.test_retrieve_goal Coverage Results" MODIFIED="1677758093774" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/milestone2$manage.coverage" NAME="manage Coverage Results" MODIFIED="1677670996778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/milestone2$tasks.coverage" NAME="tasks Coverage Results" MODIFIED="1677846727476" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/milestone2$countries.coverage" NAME="countries Coverage Results" MODIFIED="1678778292343" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/milestone2$tasks.coverage" NAME="tasks Coverage Results" MODIFIED="1678786739647" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/milestone2$update_indexes.coverage" NAME="update_indexes Coverage Results" MODIFIED="1677844633863" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

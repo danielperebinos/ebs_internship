@@ -12,6 +12,9 @@ router.register(r'timer', views.TimeLogViewSet)
 mongo_router = mongo_routers.SimpleRouter()
 mongo_router.register(r'goals', views.GoalViewSet)
 
-urlpatterns = []
+urlpatterns = [
+    path(r"anonim/", views.AnonimView.as_view(), name='anonim'),
+]
+
 urlpatterns += router.urls
 urlpatterns += mongo_router.urls

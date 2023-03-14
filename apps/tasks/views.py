@@ -1,14 +1,14 @@
 from django.db import models
 from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
-from rest_framework.permissions import AllowAny
+from django.utils.translation import gettext_lazy as _
 
 from django.conf import settings
 from config.elastic import es
 
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from rest_framework import generics, viewsets, mixins, status
+from rest_framework import generics, viewsets, mixins, status, views
 from drf_yasg.utils import swagger_auto_schema, no_body
 
 from rest_framework_mongoengine.viewsets import ModelViewSet as Mongo_ModelViewSet
@@ -47,18 +47,18 @@ class TaskViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Retriev
     @action(detail=True, methods=['put'], description='Assign a task to a user')
     def assign(self, request, **kwargs):
         tasks.assign_task(kwargs.get('pk'), request.data.get('user'), self.get_serializer_class(), self.get_queryset())
-        return Response({'message': 'successful'}, status=status.HTTP_200_OK)
+        return Response({'message': _('successful')}, status=status.HTTP_200_OK)
 
     @action(detail=True, methods=['put'])
     def update_status(self, request, **kwargs):
         tasks.update_task_status(kwargs.get('pk'), request.data, self.get_serializer_class(), self.get_queryset())
-        return Response({'message': 'successful'}, status=status.HTTP_200_OK)
+        return Response({'message': _('successful')}, status=status.HTTP_200_OK)
 
     @swagger_auto_schema(request_body=no_body)
     @action(detail=True, methods=['put'])
     def complete(self, request, **kwargs):
         tasks.complete_task(kwargs.get('pk'), self.get_serializer_class(), self.get_queryset())
-        return Response({'message': 'successful'}, status=status.HTTP_200_OK)
+        return Response({'message': _('successful')}, status=status.HTTP_200_OK)
 
     @swagger_auto_schema(query_serializer=serializers.ListTaskSerializer())
     @action(detail=False, methods=['get'])
@@ -235,3 +235,9 @@ class TimeLogViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.Ge
 class GoalViewSet(Mongo_ModelViewSet):
     serializer_class = serializers.GoalSerializer
     queryset = Goal.objects.all()
+
+
+class AnonimView(views.APIView):
+    def get(self, request):
+        return Response({'message': _('successful'), 'probe text': _(
+            'Django is a Python framework that makes it easier to create web sites using Python.')})
