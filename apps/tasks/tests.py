@@ -14,6 +14,7 @@ from django.utils.translation import gettext_lazy as _
 from apps.tasks import serializers
 from apps.tasks.models import Comment, Task, TimeLog, Status, Goal
 from apps.tasks.fixtures.goal import FixtureGoal
+from apps.tasks.countries import CountryData
 from config.elastic import es
 
 
@@ -345,3 +346,21 @@ class LocalTranslationTest(TestCase):
 
         self.assertEqual(response_ro.data['message'], _(response_en.data['message']))
         self.assertEqual(response_ro.data['probe text'], _(response_en.data['probe text']))
+
+
+class CountriesDictTest(TestCase):
+    fixtures = ['user.json']
+
+    def setUp(self) -> None:
+        self.client = APIClient()
+        self.user = User.objects.get(username="users")
+        self.client.force_authenticate(user=self.user)
+
+    def test_data(self):
+        path = reverse('countries')
+
+        response = self.client.get(path)
+        self.assertEqual(response.status_code, 200)
+
+        data = CountryData(languages=settings.COUNTRIES_LANGS).get_data()
+        self.assertListEqual(response.data, data)

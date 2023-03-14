@@ -15,6 +15,7 @@ from rest_framework_mongoengine.viewsets import ModelViewSet as Mongo_ModelViewS
 
 from apps.tasks import serializers
 from apps.tasks.models import Task, TimeLog, Status, Comment, Goal
+from apps.tasks.countries import CountryData
 from apps.tasks import tasks
 
 import datetime
@@ -241,3 +242,13 @@ class AnonimView(views.APIView):
     def get(self, request):
         return Response({'message': _('successful'), 'probe text': _(
             'Django is a Python framework that makes it easier to create web sites using Python.')})
+
+
+class CountryDictView(views.APIView):
+    countries = CountryData(languages=settings.COUNTRIES_LANGS).get_data()
+
+    @swagger_auto_schema(responses={200: serializers.CountrySerializer})
+    def get(self, request):
+        return Response(
+            serializers.CountrySerializer(self.countries, many=True).data
+        )

@@ -174,6 +174,8 @@ LANGUAGES = (
     ('ro', _('Romanian')),
 )
 
+COUNTRIES_LANGS = ['en', 'ro', 'de', 'pl', 'pt', 'ru']
+
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )

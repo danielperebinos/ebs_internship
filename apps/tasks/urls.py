@@ -14,6 +14,7 @@ mongo_router.register(r'goals', views.GoalViewSet)
 
 urlpatterns = [
     path(r"anonim/", views.AnonimView.as_view(), name='anonim'),
+    path(r"countries", views.CountryDictView.as_view(), name='countries')
 ]
 
 urlpatterns += router.urls

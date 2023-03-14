@@ -2,9 +2,6 @@ import pycountry
 import gettext
 
 from django.conf import settings
-
-settings.configure()
-
 from django.core.cache import cache
 
 
@@ -18,10 +15,13 @@ class CountryData:
     def translate_country(self, country):
         names = {}
         for language in self.languages:
-            lang = gettext.translation('iso3166', pycountry.LOCALES_DIR, languages=[language])
-            lang.install()
-            _ = lang.gettext
-            names[language] = _(country.name)
+            if language != 'en':
+                lang = gettext.translation('iso3166', pycountry.LOCALES_DIR, languages=[language])
+                lang.install()
+                _ = lang.gettext
+                names[language] = _(country.name)
+            else:
+                names[language] = country.name
 
         return names
 

@@ -107,7 +107,17 @@ class ScheduleTimeLogSerializer(serializers.ModelSerializer):
         read_only = ('id',)
 
 
+######################
+# Goals
 class GoalSerializer(mongo_serializers.DocumentSerializer):
     class Meta:
         model = Goal
         fields = '__all__'
+
+
+######################
+# Countries
+class CountrySerializer(serializers.Serializer):
+    alpha_2 = serializers.CharField(min_length=2, max_length=3)
+    phone_code = serializers.CharField(min_length=2, max_length=10)
+    name_language = serializers.DictField(child=serializers.CharField())
